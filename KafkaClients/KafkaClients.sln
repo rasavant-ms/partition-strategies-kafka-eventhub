@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaClients4Partitions", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaClientsSpecificPartitions", "..\KafkaClientsSpecificPartitions\KafkaClientsSpecificPartitions.csproj", "{506923A5-C899-467B-910B-5921F624EA30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaClientsKeyedMessages", "..\KafkaClientsKeyedMessages\KafkaClientsKeyedMessages.csproj", "{67761743-68D7-4818-9A55-600ED62913EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{506923A5-C899-467B-910B-5921F624EA30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{506923A5-C899-467B-910B-5921F624EA30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{506923A5-C899-467B-910B-5921F624EA30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67761743-68D7-4818-9A55-600ED62913EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67761743-68D7-4818-9A55-600ED62913EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67761743-68D7-4818-9A55-600ED62913EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67761743-68D7-4818-9A55-600ED62913EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

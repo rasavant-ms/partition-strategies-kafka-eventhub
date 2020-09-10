@@ -3,7 +3,7 @@ using System;
 using System.Threading;
 using System.Configuration;
 
-namespace KafkaClientsSpecificPartitions
+namespace KafkaClientsKeyedMessages
 {
     class Program
     {
