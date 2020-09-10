@@ -7,7 +7,7 @@ namespace KafkaClientsSpecificPartitions
 {
     class Program
     {
-        private static int NumOfMessages = 10;
+        private static int NumOfMessages = 30;
 
         public static void Main(string[] args)
         {
@@ -86,8 +86,14 @@ namespace KafkaClientsSpecificPartitions
 
             using (var c = new ConsumerBuilder<string, string>(consumerConfig).Build())
             {
-                // Subscribing to one or more partitions
+                // Subscribing to one partition
                 c.Assign(new TopicPartition(topic, partition));
+
+                // Subscribing to list of partitions
+                //c.Assign(new List<TopicPartition> { 
+                //    new TopicPartition(topic, partition1), 
+                //    new TopicPartition(topic, partition2) 
+                //});
 
                 CancellationTokenSource cts = new CancellationTokenSource();
                 Console.CancelKeyPress += (_, e) =>

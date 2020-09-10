@@ -2,6 +2,7 @@
 using System;
 using System.Threading;
 using System.Configuration;
+using System.Collections.Generic;
 
 namespace KafkaClientsKeyedMessages
 {
@@ -14,19 +15,18 @@ namespace KafkaClientsKeyedMessages
             string broker = ConfigurationManager.AppSettings["EH_FQDN"];
             string connectionString = ConfigurationManager.AppSettings["EH_CONNECTION_STRING"];
             string topic = ConfigurationManager.AppSettings["EH_NAME"];
-            int partition = Convert.ToInt16(ConfigurationManager.AppSettings["EH_PARTITION"]);
             string consumerGroup = ConfigurationManager.AppSettings["CONSUMER_GROUP"];
 
             Console.WriteLine("Initializing Producer");
-            RunProducer(broker, connectionString, topic, partition);
+            RunProducer(broker, connectionString, topic);
             Console.WriteLine();
             Console.WriteLine("Initializing Consumer");
-            RunConsumer(broker, connectionString, consumerGroup, topic, partition);
+            RunConsumer(broker, connectionString, consumerGroup, topic);
             Console.ReadKey();
 
         }
 
-        public static void RunProducer(string broker, string connectionString, string topic, int partition)
+        public static void RunProducer(string broker, string connectionString, string topic)
         {
             // Set producer config
             var producerConfig = new ProducerConfig
@@ -38,23 +38,22 @@ namespace KafkaClientsKeyedMessages
                 SaslPassword = connectionString,
             };
 
-            // Key is set as Null since we are not using it
-            using (var p = new ProducerBuilder<Null, string>(producerConfig).Build())
+            // Key is set to integer here. It can also be set to any other valid key value pair
+            using (var p = new ProducerBuilder<int, string>(producerConfig).Build())
             {
-                var topicPartition = new TopicPartition(topic, partition);
                 try
                 {
                     // Sending fixed number of messages using Produce method to process 
                     // many messages in rapid succession instead of using ProduceAsync
 
-                    // Sending messages to specific partition of a topic
-                    for (int i = 0; i < NumOfMessages; i++)
+                    // Sending messages with key and value
+                    for (int i = 1; i <= NumOfMessages; i++)
                     {
 
                         string value = "message-" + i;
-                        Console.WriteLine($"Sending message with key: not-specified," +
-                            $"value: {value}, partition-id: {partition}");
-                        p.Produce(topicPartition, new Message<Null, string> { Value = value });
+                        Console.WriteLine($"Sending message with key: {i % 2}," +
+                            $"value: {value}, partition-id: not-specified");
+                        p.Produce(topic, new Message<int, string> { Key = i % 2, Value = value });
                     }
 
                     // Wait up to 10 seconds for any inflight messages to be sent
@@ -67,9 +66,9 @@ namespace KafkaClientsKeyedMessages
             }
         }
 
-        // To simulate multiple consumers, strip out this code in its own program
+        // To simulate multiple consumers, strip out this code into own program
         // and run both programs simultaneously
-        public static void RunConsumer(string broker, string connectionString, string consumerGroup, string topic, int partition)
+        public static void RunConsumer(string broker, string connectionString, string consumerGroup, string topic)
         {
             var consumerConfig = new ConsumerConfig
             {
@@ -84,10 +83,9 @@ namespace KafkaClientsKeyedMessages
                 AutoOffsetReset = AutoOffsetReset.Earliest
             };
 
-            using (var c = new ConsumerBuilder<string, string>(consumerConfig).Build())
+            using (var c = new ConsumerBuilder<int, string>(consumerConfig).Build())
             {
-                // Subscribing to one or more partitions
-                c.Assign(new TopicPartition(topic, partition));
+                c.Subscribe(topic);
 
                 CancellationTokenSource cts = new CancellationTokenSource();
                 Console.CancelKeyPress += (_, e) =>
