@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaClients4Partitions", "KafkaClients4Partitions.csproj", "{1195CA64-55EB-4C17-8DDC-2391903A14C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaClients4Partitions", "KafkaClients\KafkaClients4Partitions.csproj", "{1195CA64-55EB-4C17-8DDC-2391903A14C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaClientsSpecificPartitions", "..\KafkaClientsSpecificPartitions\KafkaClientsSpecificPartitions.csproj", "{506923A5-C899-467B-910B-5921F624EA30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaClientsSpecificPartitions", "KafkaClientsSpecificPartitions\KafkaClientsSpecificPartitions.csproj", "{506923A5-C899-467B-910B-5921F624EA30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaClientsKeyedMessages", "..\KafkaClientsKeyedMessages\KafkaClientsKeyedMessages.csproj", "{67761743-68D7-4818-9A55-600ED62913EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaClientsKeyedMessages", "KafkaClientsKeyedMessages\KafkaClientsKeyedMessages.csproj", "{67761743-68D7-4818-9A55-600ED62913EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
